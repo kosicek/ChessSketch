@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChessPiece.cs" />
+    <Compile Include="Board.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +80,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\background.jpg" />
+    <Content Include="Assets\Black_Bishop.png" />
+    <Content Include="Assets\Black_King.png" />
+    <Content Include="Assets\Black_Knight.png" />
+    <Content Include="Assets\Black_Pawn.png" />
+    <Content Include="Assets\Black_Queen.png" />
+    <Content Include="Assets\Black_Rook.png" />
+    <Content Include="Assets\Chessboard.png" />
+    <Content Include="Assets\Chess_Title.png" />
+    <Content Include="Assets\empty-blackboard.jpg" />
+    <Content Include="Assets\Play_Button.png" />
+    <Content Include="Assets\Play_Button_selected.png" />
+    <Content Include="Assets\White_Bishop.png" />
+    <Content Include="Assets\White_King.png" />
+    <Content Include="Assets\White_Knight.png" />
+    <Content Include="Assets\White_Pawn.png" />
+    <Content Include="Assets\White_Queen.png" />
+    <Content Include="Assets\White_Rook.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
