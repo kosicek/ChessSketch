@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ChessSketch.Properties.Resources.empty_blackboard;
+            this.BackgroundImage = global::ChessSketch.Properties.Resources.Black_Board_Resized;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1488, 1059);
             this.Controls.Add(this.panel1);

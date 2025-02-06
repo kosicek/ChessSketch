@@ -73,9 +73,29 @@ namespace ChessSketch.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Black_Board_Resized {
+            get {
+                object obj = ResourceManager.GetObject("Black_Board_Resized", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap empty_blackboard {
             get {
                 object obj = ResourceManager.GetObject("empty-blackboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap empty_blackboardJPG {
+            get {
+                object obj = ResourceManager.GetObject("empty-blackboardJPG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

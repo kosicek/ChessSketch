@@ -114,7 +114,9 @@
     <Resource Include="Assets\White_Rook.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Black_Board_Resized.jpg" />
     <Content Include="Assets\Chess_Title.ico" />
+    <None Include="Assets\empty-blackboardJPG.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
