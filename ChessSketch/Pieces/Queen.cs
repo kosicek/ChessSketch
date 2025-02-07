@@ -8,7 +8,7 @@ namespace ChessSketch
 {
     public class Queen : ChessPiece
     {
-        public override Piecetype Type => Piecetype.Pawn;
+        public override Piecetype Type => Piecetype.Queen;
 
         public override Team Color { get; }
 
