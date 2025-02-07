@@ -67,16 +67,9 @@ namespace ChessSketch
             }
         }
 
-        public bool InBounds(Position Pos)
+        public static bool InBounds(Position Pos)
         {
-            if (Pos.Row < 0 || Pos.Column < 0 || Pos.Row > 8 || Pos.Column > 8)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return Pos.Row >= 0 && Pos.Row < 8 && Pos.Column >= 0 && Pos.Column < 8;
         }
 
         public bool IsEmpty(Position pos) 

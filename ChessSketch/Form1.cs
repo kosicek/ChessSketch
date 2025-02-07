@@ -14,8 +14,10 @@ namespace ChessSketch
     {
         // Array containing buttons representing the squares on a chess board
         public Button[,] ButtonGrid = new Button[8, 8];
+        private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
 
         private GameState gameState;
+        private Position selectedPos = null;
         public Form1()
         {
             InitializeComponent();
@@ -59,7 +61,7 @@ namespace ChessSketch
                     // Debug
                     ButtonGrid[row, column].Text = row + "/" + column;
                     // Gives Tags for event
-                    ButtonGrid[row, column].Tag = new Point(row,column);
+                    ButtonGrid[row, column].Tag = new Position(row,column);
 
                     //Sets some basic visuals
                     ButtonGrid[row, column].BackColor = Color.Transparent;
@@ -77,7 +79,45 @@ namespace ChessSketch
         {
             // get the button clicked
             Button clicked = (Button)sender;
+            Position position = (Position)clicked.Tag;
 
+            if (selectedPos == null)
+            {
+                OnFromPositionSelected(position);
+            }
+            else
+            {
+                OnToPositionSelected(position);
+            }
+        }
+
+        private void OnFromPositionSelected(Position position)
+        {
+            IEnumerable<Move> moves = gameState.LegalMovesForPiece(position);
+
+            if (moves.Any())
+            {
+                selectedPos = position;
+                CacheMoves(moves);
+                ShowHighlights();
+            }
+        }
+
+        private void OnToPositionSelected(Position position)
+        {
+            selectedPos = null;
+            HideHighlights();
+
+            if (moveCache.TryGetValue(position, out Move move))
+            {
+                HandleMove(move);
+            }
+        }
+
+        private void HandleMove(Move move)
+        {
+            gameState.MakeMove(move);
+            RenderBoard(gameState.Board);
         }
 
         private void RenderBoard(Board board)
@@ -90,6 +130,41 @@ namespace ChessSketch
                     ButtonGrid[row, column].BackgroundImage = Images.GetImage(piece);
             }
             }   
+        }
+
+        private void CacheMoves(IEnumerable<Move> moves)
+        {
+            moveCache.Clear();
+            foreach (Move move in moves)
+            {
+                moveCache[move.ToPos] = move;
+            }
+        }
+
+        private void ShowHighlights()
+        {
+            Color color = Color.Green;
+            Color color2 = Color.LightGreen;
+
+            foreach (Position to in moveCache.Keys)
+            {
+                ButtonGrid[to.Row, to.Column].BackColor = color;
+                ButtonGrid[to.Row, to.Column].FlatAppearance.MouseOverBackColor = color2;
+            }
+        }
+
+        private void HideHighlights()
+        {
+            Color color = Color.Transparent;
+
+            foreach (Position to in moveCache.Keys)
+            {
+
+                {
+                    ButtonGrid[to.Row, to.Column].BackColor = color;
+                    ButtonGrid[to.Row, to.Column].FlatAppearance.MouseOverBackColor = color;
+                }
+            }
         }
     }
 }

@@ -61,11 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChessPiece.cs" />
+    <Compile Include="Pieces\ChessPiece.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Moves\Move.cs" />
+    <Compile Include="Moves\NormalMove.cs" />
     <Compile Include="MoveType.cs" />
     <Compile Include="Pieces\Bishop.cs" />
     <Compile Include="GameState.cs" />

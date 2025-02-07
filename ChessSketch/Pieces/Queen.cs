@@ -12,6 +12,9 @@ namespace ChessSketch
 
         public override Team Color { get; }
 
+        private static readonly Direction[] dirs = new Direction[] 
+        { Direction.Up, Direction.Down, Direction.Left, Direction.Right, Direction.DiagonalUpRight, Direction.DiagonalUpLeft, Direction.DiagonalDownRight, Direction.DiagonalDownLeft };
+
         public Queen(Team color)
         {
             Color = color;
@@ -22,6 +25,11 @@ namespace ChessSketch
             Queen copy = new Queen(Color);
             copy.HasMoved = HasMoved;
             return copy;
+        }
+
+        public override IEnumerable<Move> GetMoves(Position from, Board board)
+        {
+            return HavePositionsInDirs(from, board, dirs).Select(to => new NormalMove(from, to));
         }
     }
 }

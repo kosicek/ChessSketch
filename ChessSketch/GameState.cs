@@ -16,5 +16,22 @@ namespace ChessSketch
             ToMove = player;
             Board = board;
         }
+
+        public IEnumerable<Move> LegalMovesForPiece(Position position)
+        {
+            if (Board.IsEmpty(position) || Board[position].Color != ToMove)
+            {
+                return Enumerable.Empty<Move>();
+            }
+
+            ChessPiece piece = Board[position];
+            return piece.GetMoves(position, Board);
+        }
+
+        public void MakeMove(Move move)
+        {
+            move.Execute(Board);
+            ToMove = ToMove.Enemy();
+        }
     }
 }
