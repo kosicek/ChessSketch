@@ -8,15 +8,9 @@ namespace ChessSketch
 {
     public abstract class ChessPiece
     {
-        private bool _hasMoved = false;
+        public bool HasMoved { get; set; } = false;
         public abstract Team Color { get; }
         public abstract Piecetype Type { get; }
-
-        public bool HasMoved
-        {
-            get { return _hasMoved; }
-            set { _hasMoved = value; }
-        }
 
         public abstract ChessPiece Copy();
 
@@ -48,6 +42,16 @@ namespace ChessSketch
         protected IEnumerable<Position> HavePositionsInDirs(Position from, Board board, Direction[] directions)
         {
             return directions.SelectMany(dir => HavePositionsInDir(from, board, dir));
+        }
+
+        public virtual bool CanCaptureOpponentKing(Position from, Board board)
+        {
+            return GetMoves(from, board).Any(move =>
+            {
+                ChessPiece piece = board[move.ToPos];
+                return piece != null && piece.Type == Piecetype.King;
+            }
+            );
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,6 +76,49 @@ namespace ChessSketch
         public bool IsEmpty(Position pos) 
         {
             return this[pos] == null;
+        }
+
+        public IEnumerable<Position> PiecePositions()
+        {
+            for (int row = 0; row < 8; row++)
+            {
+                for (int column = 0; column < 8; column++)
+                {
+                    Position pos = new Position(row, column);
+
+                    if (!IsEmpty(pos))
+                    {
+                        yield return pos;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<Position> PiecePositionsFor(Team color)
+        {
+            return PiecePositions().Where(pos => this[pos].Color == color);
+        }
+
+        public bool IsInCheck(Team color)
+        {
+            return PiecePositionsFor(color.Enemy()).Any(pos =>
+            {
+                ChessPiece piece = this[pos];
+                return piece.CanCaptureOpponentKing(pos, this);
+            }
+            );
+        }
+
+        public Board Copy()
+        {
+            Board copy = new Board();
+
+            foreach (Position pos in PiecePositions())
+            {
+                copy[pos] = this[pos].Copy();
+            }
+
+            return copy;
         }
     }
 }

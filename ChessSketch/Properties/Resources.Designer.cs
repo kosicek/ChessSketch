@@ -63,9 +63,49 @@ namespace ChessSketch.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Black_Bishop {
+            get {
+                object obj = ResourceManager.GetObject("Black_Bishop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Black_Board_Resized {
             get {
                 object obj = ResourceManager.GetObject("Black_Board_Resized", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Black_Knight {
+            get {
+                object obj = ResourceManager.GetObject("Black_Knight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Black_Queen {
+            get {
+                object obj = ResourceManager.GetObject("Black_Queen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Black_Rook {
+            get {
+                object obj = ResourceManager.GetObject("Black_Rook", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

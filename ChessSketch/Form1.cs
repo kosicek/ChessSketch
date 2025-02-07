@@ -110,8 +110,29 @@ namespace ChessSketch
 
             if (moveCache.TryGetValue(position, out Move move))
             {
+                if (move.Type == MoveType.PawnPromotion)
+                {
+                   HandlePromotion(move.FromPos, move.ToPos);
+                }
+                else
+                {
                 HandleMove(move);
+                }
+                
             }
+        }
+
+        private void HandlePromotion(Position from, Position to)
+        {
+            panel2.Visible = true;
+
+            PieceSelected += type =>
+            {
+                panel2.Visible = false;
+                Move promMove = new PawnPromotion(from, to,type);
+                HandleMove(promMove);
+            };
+
         }
 
         private void HandleMove(Move move)
@@ -165,6 +186,32 @@ namespace ChessSketch
                     ButtonGrid[to.Row, to.Column].FlatAppearance.MouseOverBackColor = color;
                 }
             }
+        }
+
+        public event Action<Piecetype> PieceSelected;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Queen
+            PieceSelected?.Invoke(Piecetype.Queen);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Knight
+            PieceSelected?.Invoke(Piecetype.Knight);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Rook
+            PieceSelected?.Invoke(Piecetype.Rook);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Bishop
+            PieceSelected?.Invoke(Piecetype.Bishop);
         }
     }
 }

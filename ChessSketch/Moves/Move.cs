@@ -16,5 +16,12 @@ namespace ChessSketch
 
         public abstract void Execute(Board board);
 
+        public virtual bool IsLegal(Board board)
+        {
+            Team color = board[FromPos].Color;
+            Board boardCopy = board.Copy();
+            Execute(boardCopy);
+            return !boardCopy.IsInCheck(color);
+        }
     }
 }

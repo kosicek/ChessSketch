@@ -50,13 +50,31 @@ namespace ChessSketch
             return board[pos].Color != Color;
         }
 
+        private static IEnumerable<Move> promotionMoves(Position from, Position to)
+        {
+            yield return new PawnPromotion(from, to, Piecetype.Knight);
+            yield return new PawnPromotion(from, to, Piecetype.Bishop);
+            yield return new PawnPromotion(from, to, Piecetype.Rook);
+            yield return new PawnPromotion(from, to, Piecetype.Queen);
+        }
+
         private IEnumerable<Move> FowardMoves(Position from, Board board)
         {
             Position oneMovePos = from + Foward;
 
             if (CanMoveTo(oneMovePos, board))
             {
-                yield return new NormalMove(from, oneMovePos);
+                if (oneMovePos.Row == 0 || oneMovePos.Row == 7)
+                {
+                    foreach (Move promMove in promotionMoves(from, oneMovePos))
+                    {
+                        yield return promMove;
+                    }
+                }
+                else
+                {
+                    yield return new NormalMove(from, oneMovePos);
+                }
 
                 Position twoMovesPos = oneMovePos + Foward;
 
@@ -76,7 +94,17 @@ namespace ChessSketch
 
                 if (CanCaptureAt(to, board))
                 {
-                    yield return new NormalMove(from, to);
+                    if (to.Row == 0 || to.Row == 7)
+                    {
+                        foreach (Move promMove in promotionMoves(from, to))
+                        {
+                            yield return promMove;
+                        }
+                    }
+                    else
+                    {
+                        yield return new NormalMove(from, to);
+                    }
                 }
             }
         }
@@ -85,6 +113,15 @@ namespace ChessSketch
         {
             // returns the combination of two
             return FowardMoves(from, board).Concat(DiagonalMoves(from, board));
+        }
+
+        public override bool CanCaptureOpponentKing(Position from, Board board)
+        {
+            return DiagonalMoves(from, board).Any(move =>
+            {
+                ChessPiece piece = board[move.ToPos];
+                return piece != null && piece.Type == Piecetype.King;
+            });
         }
     }
 }
